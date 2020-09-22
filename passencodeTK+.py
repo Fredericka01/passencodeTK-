@@ -6,7 +6,6 @@
 # ---> 1.2) column 2: login             <---#
 # ---> 1.3) column 3: pass              <---#
 
-
 # Importing libs. #
 
 import csv
@@ -24,11 +23,15 @@ medium_font = ('Verdana',15)
 
 
 # Counting rows in csv file. #
+def counting_row():
+    global row_count
+    with open("pwencodeDB.csv","r") as f:
+        reader = csv.reader(f,delimiter = ",")
+        data = list(reader)
+        return len(data)
 
-with open("pwencodeDB.csv","r") as f:
-    reader = csv.reader(f,delimiter = ",")
-    data = list(reader)
-    row_count = len(data)
+
+row_count = counting_row()
 
 def exit_funct():
     window.destroy()
@@ -377,6 +380,7 @@ def encode_process():
 
 
 def decode_process():
+    row_count = counting_row()
     Process_decode = False
     a = 0
     Is_found = False
