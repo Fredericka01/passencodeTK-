@@ -22,7 +22,7 @@ large_font = ('Verdana',20)
 medium_font = ('Verdana',15)
 
 
-# Counting rows in csv file. #
+# Counting rows in csv file. // return number of rows in csv file#
 def counting_row():
     global row_count
     with open("pwencodeDB.csv","r") as f:
@@ -33,12 +33,18 @@ def counting_row():
 
 row_count = counting_row()
 
+# Closes principal window
+
 def exit_funct():
     window.destroy()
+
+# Closes password window
 
 def exit_answer():
     global answer_pop
     answer_pop.destroy()
+
+# Init Encode process
 
 def encode_process():
     pw = masterentry.get()
@@ -378,6 +384,7 @@ def encode_process():
     status_bar.place(x=20, y=505, width=780, height=90)
 
 
+# Init Decode process
 
 def decode_process():
     row_count = counting_row()
@@ -411,10 +418,12 @@ def decode_process():
             Is_found = True  
             Process_decode = True
 
- 
         
     if Is_found == False:
-        print("Service inconnu")
+        Process_decode = False
+        line_found = "Aucune entrée ne correspond a ce que vous avez entré"
+        final = "Essayez autre chose"
+
 
     if Process_decode == True:
         a = 0
@@ -450,333 +459,323 @@ def decode_process():
 
 # Tranfering master to decode.multiplier. #
 
-    key = 1
-    for letters in pw:
+    if Process_decode == True:
+        key = 1
+        for letters in pw:
+            
+    # Lower letters. #
+            if letters == "a":
+                key = key * 5.4
+            elif letters == "b":
+                key = key * 8.3
+            elif letters == "c":
+                key = key * 6.7
+            elif letters == "d":
+                key = key * 2.1
+            elif letters == "e":
+                key = key * 5.5
+            elif letters == "f":
+                key = key * 8.9
+            elif letters == "g":
+                key = key * 8.2
+            elif letters == "h":
+                key = key * 5.6
+            elif letters == "i":
+                key = key * 9.7
+            elif letters == "j":
+                key = key * 6.1
+            elif letters == "k":
+                key = key * 1.9
+            elif letters == "l":
+                key = key * 8.4
+            elif letters == "m":
+                key = key * 5.8
+            elif letters == "n":
+                key = key * 6.0
+            elif letters == "o":
+                key = key * 6.8
+            elif letters == "p":
+                key = key * 9.3
+            elif letters == "q":
+                key = key * 7.6
+            elif letters == "r":
+                key = key * 5.9
+            elif letters == "s":
+                key = key * 9.8
+            elif letters == "t":
+                key = key * 5.1
+            elif letters == "u":
+                key = key * 9.1
+            elif letters == "v":
+                key = key * 7.7
+            elif letters == "w":
+                key = key * 8.0
+            elif letters == "x":
+                key = key * 9.2
+            elif letters == "y":
+                key = key * 1.2
+            elif letters == "z":
+                key = key * 3.4
+            elif letters == "-":
+                key = key * 5.2
+
+
+    # Upper letters. #
+            elif letters == "A":
+                key = key * 5.3
+            elif letters == "B":
+                key = key * 9.9
+            elif letters == "C":
+                key = key * 6.6
+            elif letters == "D":
+                key = key * 2.0
+            elif letters == "E":
+                key = key * 3.1
+            elif letters == "F":
+                key = key * 1.0
+            elif letters == "G":
+                key = key * 4.8
+            elif letters == "H":
+                key = key * 6.9
+            elif letters == "I":
+                key = key * 2.9
+            elif letters == "J":
+                key = key * 4.9
+            elif letters == "K":
+                key = key * 6.5
+            elif letters == "L":
+                key = key * 3.3
+            elif letters == "M":
+                key = key * 3.2
+            elif letters == "N":
+                key = key * 6.2
+            elif letters == "O":
+                key = key * 9.5
+            elif letters == "P":
+                key = key * 4.6
+            elif letters == "Q":
+                key = key * 8.6
+            elif letters == "R":
+                key = key * 4.1
+            elif letters == "S":
+                key = key * 8.7
+            elif letters == "T":
+                key = key * 3.8
+            elif letters == "U":
+                key = key * 4.4
+            elif letters == "V":
+                key = key * 3.7
+            elif letters == "W":
+                key = key * 2.5
+            elif letters == "X":
+                key = key * 4.0
+            elif letters == "Y":
+                key = key * 3.0
+            elif letters == "Z":
+                key = key * 6.3
+
+    # Special character. #
+            elif letters == "-":
+                key = key * 5.2
+            elif letters == "!":
+                key = key * 9.6
+            elif letters == "@":
+                key = key * 1.8
+            elif letters == "?":
+                key = key * 5.7
+            elif letters == "%":
+                key = key * 3.5
+
+
+    # Numbers. #
+            elif letters == "1":
+                key = key * 1.6
+            elif letters == "2":
+                key = key * 8.5
+            elif letters == "3":
+                key = key * 7.5
+            elif letters == "4":
+                key = key * 2.2
+            elif letters == "5":
+                key = key * 1.7
+            elif letters == "6":
+                key = key * 4.2
+            elif letters == "7":
+                key = key * 8.1
+            elif letters == "8":
+                key = key * 7.4
+            elif letters == "9":
+                key = key * 3.6
+            elif letters == "0":
+                key = key * 4.5
+
+        key = round(key)
+
+
+    # Decoding encoded text with key. #
+
+        string = field[2]
+        passw = ""
+        while string != "":
+            pos = string.find("/")
+            if pos == 0:
+                string = ""
+            temp = string[0:pos]
+            string = string[(pos + 1):]
+            temp2 =int(temp) / key
+            
+            
+    # Lower characters. #
         
-# Lower letters. #
-        if letters == "a":
-            key = key * 5.4
-        elif letters == "b":
-            key = key * 8.3
-        elif letters == "c":
-            key = key * 6.7
-        elif letters == "d":
-            key = key * 2.1
-        elif letters == "e":
-            key = key * 5.5
-        elif letters == "f":
-            key = key * 8.9
-        elif letters == "g":
-            key = key * 8.2
-        elif letters == "h":
-            key = key * 5.6
-        elif letters == "i":
-            key = key * 9.7
-        elif letters == "j":
-            key = key * 6.1
-        elif letters == "k":
-            key = key * 1.9
-        elif letters == "l":
-            key = key * 8.4
-        elif letters == "m":
-            key = key * 5.8
-        elif letters == "n":
-            key = key * 6.0
-        elif letters == "o":
-            key = key * 6.8
-        elif letters == "p":
-            key = key * 9.3
-        elif letters == "q":
-            key = key * 7.6
-        elif letters == "r":
-            key = key * 5.9
-        elif letters == "s":
-            key = key * 9.8
-        elif letters == "t":
-            key = key * 5.1
-        elif letters == "u":
-            key = key * 9.1
-        elif letters == "v":
-            key = key * 7.7
-        elif letters == "w":
-            key = key * 8.0
-        elif letters == "x":
-            key = key * 9.2
-        elif letters == "y":
-            key = key * 1.2
-        elif letters == "z":
-            key = key * 3.4
-        elif letters == "-":
-            key = key * 5.2
+            if temp2 == 54:
+                passw = passw + "a"
+            elif temp2 == 83:
+                passw = passw + "b"
+            elif temp2 == 67:
+                passw = passw + "c"
+            elif temp2 == 21:
+                passw = passw + "d"
+            elif temp2 == 55:
+                passw = passw + "e"
+            elif temp2 == 89:
+                passw = passw + "f"
+            elif temp2 == 82:
+                passw = passw + "g"
+            elif temp2 == 56:
+                passw = passw + "h"
+            elif temp2 == 97:
+                passw = passw + "i"
+            elif temp2 == 61:
+                passw = passw + "j"
+            elif temp2 == 19:
+                passw = passw + "k"
+            elif temp2 == 84:
+                passw = passw + "l"
+            elif temp2 == 58:
+                passw = passw + "m"
+            elif temp2 == 60:
+                passw = passw + "n"
+            elif temp2 == 68:
+                passw = passw + "o"
+            elif temp2 == 93:
+                passw = passw + "p"
+            elif temp2 == 76:
+                passw = passw + "q"
+            elif temp2 == 59:
+                passw = passw + "r"
+            elif temp2 == 98:
+                passw = passw + "s"
+            elif temp2 == 51:
+                passw = passw + "t"
+            elif temp2 == 91:
+                passw = passw + "u"
+            elif temp2 == 77:
+                passw = passw + "v"
+            elif temp2 == 80:
+                passw = passw + "w"
+            elif temp2 == 92:
+                passw = passw + "x"
+            elif temp2 == 12:
+                passw = passw + "y"
+            elif temp2 == 34:
+                passw = passw + "z"
 
 
-# Upper letters. #
-        elif letters == "A":
-            key = key * 5.3
-        elif letters == "B":
-            key = key * 9.9
-        elif letters == "C":
-            key = key * 6.6
-        elif letters == "D":
-            key = key * 2.0
-        elif letters == "E":
-            key = key * 3.1
-        elif letters == "F":
-            key = key * 1.0
-        elif letters == "G":
-            key = key * 4.8
-        elif letters == "H":
-            key = key * 6.9
-        elif letters == "I":
-            key = key * 2.9
-        elif letters == "J":
-            key = key * 4.9
-        elif letters == "K":
-            key = key * 6.5
-        elif letters == "L":
-            key = key * 3.3
-        elif letters == "M":
-            key = key * 3.2
-        elif letters == "N":
-            key = key * 6.2
-        elif letters == "O":
-            key = key * 9.5
-        elif letters == "P":
-            key = key * 4.6
-        elif letters == "Q":
-            key = key * 8.6
-        elif letters == "R":
-            key = key * 4.1
-        elif letters == "S":
-            key = key * 8.7
-        elif letters == "T":
-            key = key * 3.8
-        elif letters == "U":
-            key = key * 4.4
-        elif letters == "V":
-            key = key * 3.7
-        elif letters == "W":
-            key = key * 2.5
-        elif letters == "X":
-            key = key * 4.0
-        elif letters == "Y":
-            key = key * 3.0
-        elif letters == "Z":
-            key = key * 6.3
+    # Upper characters. #
 
-# Special character. #
-        elif letters == "-":
-            key = key * 5.2
-        elif letters == "!":
-            key = key * 9.6
-        elif letters == "@":
-            key = key * 1.8
-        elif letters == "?":
-            key = key * 5.7
-        elif letters == "%":
-            key = key * 3.5
+            elif temp2 == 53:
+                passw = passw + "A"
+            elif temp2 == 99:
+                passw = passw + "B"
+            elif temp2 == 66:
+                passw = passw + "C"
+            elif temp2 == 20:
+                passw = passw + "D"
+            elif temp2 == 31:
+                passw = passw + "E"
+            elif temp2 == 10:
+                passw = passw + "F"
+            elif temp2 == 48:
+                passw = passw + "G"
+            elif temp2 == 69:
+                passw = passw + "H"
+            elif temp2 == 29:
+                passw = passw + "I"
+            elif temp2 == 49:
+                passw = passw + "J"
+            elif temp2 == 65:
+                passw = passw + "K"
+            elif temp2 == 33:
+                passw = passw + "L"
+            elif temp2 == 32:
+                passw = passw + "M"
+            elif temp2 == 62:
+                passw = passw + "N"
+            elif temp2 == 95:
+                passw = passw + "O"
+            elif temp2 == 46:
+                passw = passw + "P"
+            elif temp2 == 86:
+                passw = passw + "Q"
+            elif temp2 == 41:
+                passw = passw + "R"
+            elif temp2 == 87:
+                passw = passw + "S"
+            elif temp2 == 38:
+                passw = passw + "T"
+            elif temp2 == 44:
+                passw = passw + "U"
+            elif temp2 == 37:
+                passw = passw + "V"
+            elif temp2 == 25:
+                passw = passw + "W"
+            elif temp2 == 40:
+                passw = passw + "X"
+            elif temp2 == 30:
+                passw = passw + "Y"
+            elif temp2 == 63:
+                passw = passw + "Z"
+            
+    # Special characters. #
 
+            elif temp2 == 52:
+                passw = passw + "-"
+            elif temp2 == 96:
+                passw = passw + "!"
+            elif temp2 == 18:
+                passw = passw + "@"
+            elif temp2 == 57:
+                passw = passw + "?"
+            elif temp2 == 35:
+                passw = passw + "%"
 
-# Numbers. #
-        elif letters == "1":
-            key = key * 1.6
-        elif letters == "2":
-            key = key * 8.5
-        elif letters == "3":
-            key = key * 7.5
-        elif letters == "4":
-            key = key * 2.2
-        elif letters == "5":
-            key = key * 1.7
-        elif letters == "6":
-            key = key * 4.2
-        elif letters == "7":
-            key = key * 8.1
-        elif letters == "8":
-            key = key * 7.4
-        elif letters == "9":
-            key = key * 3.6
-        elif letters == "0":
-            key = key * 4.5
+    # Numbers. #
 
-    key = round(key)
-
-
-# Decoding encoded text with key. #
-
-    string = field[2]
-    passw = ""
-    while string != "":
-        pos = string.find("/")
-        if pos == 0:
-            string = ""
-        temp = string[0:pos]
-        string = string[(pos + 1):]
-        temp2 =int(temp) / key
-        
-        
-# Lower characters. #
-    
-        if temp2 == 54:
-            passw = passw + "a"
-        elif temp2 == 83:
-            passw = passw + "b"
-        elif temp2 == 67:
-            passw = passw + "c"
-        elif temp2 == 21:
-            passw = passw + "d"
-        elif temp2 == 55:
-            passw = passw + "e"
-        elif temp2 == 89:
-            passw = passw + "f"
-        elif temp2 == 82:
-            passw = passw + "g"
-        elif temp2 == 56:
-            passw = passw + "h"
-        elif temp2 == 97:
-            passw = passw + "i"
-        elif temp2 == 61:
-            passw = passw + "j"
-        elif temp2 == 19:
-            passw = passw + "k"
-        elif temp2 == 84:
-            passw = passw + "l"
-        elif temp2 == 58:
-            passw = passw + "m"
-        elif temp2 == 60:
-            passw = passw + "n"
-        elif temp2 == 68:
-            passw = passw + "o"
-        elif temp2 == 93:
-            passw = passw + "p"
-        elif temp2 == 76:
-            passw = passw + "q"
-        elif temp2 == 59:
-            passw = passw + "r"
-        elif temp2 == 98:
-            passw = passw + "s"
-        elif temp2 == 51:
-            passw = passw + "t"
-        elif temp2 == 91:
-            passw = passw + "u"
-        elif temp2 == 77:
-            passw = passw + "v"
-        elif temp2 == 80:
-            passw = passw + "w"
-        elif temp2 == 92:
-            passw = passw + "x"
-        elif temp2 == 12:
-            passw = passw + "y"
-        elif temp2 == 34:
-            passw = passw + "z"
-
-
-# Upper characters. #
-
-        elif temp2 == 53:
-            passw = passw + "A"
-        elif temp2 == 99:
-            passw = passw + "B"
-        elif temp2 == 66:
-            passw = passw + "C"
-        elif temp2 == 20:
-            passw = passw + "D"
-        elif temp2 == 31:
-            passw = passw + "E"
-        elif temp2 == 10:
-            passw = passw + "F"
-        elif temp2 == 48:
-            passw = passw + "G"
-        elif temp2 == 69:
-            passw = passw + "H"
-        elif temp2 == 29:
-            passw = passw + "I"
-        elif temp2 == 49:
-            passw = passw + "J"
-        elif temp2 == 65:
-            passw = passw + "K"
-        elif temp2 == 33:
-            passw = passw + "L"
-        elif temp2 == 32:
-            passw = passw + "M"
-        elif temp2 == 62:
-            passw = passw + "N"
-        elif temp2 == 95:
-            passw = passw + "O"
-        elif temp2 == 46:
-            passw = passw + "P"
-        elif temp2 == 86:
-            passw = passw + "Q"
-        elif temp2 == 41:
-            passw = passw + "R"
-        elif temp2 == 87:
-            passw = passw + "S"
-        elif temp2 == 38:
-            passw = passw + "T"
-        elif temp2 == 44:
-            passw = passw + "U"
-        elif temp2 == 37:
-            passw = passw + "V"
-        elif temp2 == 25:
-            passw = passw + "W"
-        elif temp2 == 40:
-            passw = passw + "X"
-        elif temp2 == 30:
-            passw = passw + "Y"
-        elif temp2 == 63:
-            passw = passw + "Z"
-        
-# Special characters. #
-
-        elif temp2 == 52:
-            passw = passw + "-"
-        elif temp2 == 96:
-            passw = passw + "!"
-        elif temp2 == 18:
-            passw = passw + "@"
-        elif temp2 == 57:
-            passw = passw + "?"
-        elif temp2 == 35:
-            passw = passw + "%"
-
-# Numbers. #
-
-        elif temp2 == 16:
-            passw = passw + "1"
-        elif temp2 == 85:
-            passw = passw + "2"
-        elif temp2 == 75:
-            passw = passw + "3"
-        elif temp2 == 22:
-            passw = passw + "4"
-        elif temp2 == 17:
-            passw = passw + "5"
-        elif temp2 == 42:
-            passw = passw + "6"
-        elif temp2 == 81:
-            passw = passw + "7"
-        elif temp2 == 74:
-            passw = passw + "8"
-        elif temp2 == 36:
-            passw = passw + "9"
-        elif temp2 == 45:
-            passw = passw + "0"
+            elif temp2 == 16:
+                passw = passw + "1"
+            elif temp2 == 85:
+                passw = passw + "2"
+            elif temp2 == 75:
+                passw = passw + "3"
+            elif temp2 == 22:
+                passw = passw + "4"
+            elif temp2 == 17:
+                passw = passw + "5"
+            elif temp2 == 42:
+                passw = passw + "6"
+            elif temp2 == 81:
+                passw = passw + "7"
+            elif temp2 == 74:
+                passw = passw + "8"
+            elif temp2 == 36:
+                passw = passw + "9"
+            elif temp2 == 45:
+                passw = passw + "0"
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-    final = passw
+        final = passw
 
 
 
