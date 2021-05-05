@@ -12,6 +12,7 @@ import csv
 from tkinter import *
 
 
+
 # Defining value
 
 return_value = "The program has correctly started; Waiting for command:"
